@@ -1,0 +1,107 @@
+#include <iostream>
+#include <string>
+#include <iomanip>
+using namespace std;
+
+string convert(int digit, string low, string mid, string high);
+
+int main()
+{
+    const int MAX_INPUT = 3999, MIN_INPUT = 0,
+              ARRAY_SIZE = 4;                  
+    string answers[ARRAY_SIZE] = { "", "", "", "" }; 
+    int accumulator = 0; 
+    int userNum = 0;
+
+    do {
+    
+        cout << "Enter number between 1 and 3999: ";
+        cin >> userNum;;
+
+        if (userNum < 0)
+        {
+            cout << "Exiting program:";
+            break;
+
+            while (userNum <= MIN_INPUT || userNum >= MAX_INPUT)
+            {
+                cout << "\nInvalid Value. Number must be between 1 and 3999: ";
+                cin >> userNum;
+            }
+        }
+
+        int thous = userNum / 1000;
+        cout << thous;
+
+        int hund = userNum % 1000 / 100;
+        cout << "hundreds:" << hund;
+
+        int tens = userNum % 100 / 10;
+        cout << "tens:" << tens;
+
+        int ones = userNum % 10 / 1;
+        cout << "Ones: " << ones << endl;
+
+
+        answers[0] = convert(thous, "M", "M", "M");
+        answers[1] = convert(hund, "C", "D", "M");
+
+        answers[2] = convert(tens, "X", "L", "C");
+        answers[3] = convert(ones, "I", "V", "X");
+
+        cout << answers[0] << endl << answers[1] << endl << answers[2];
+        cout << endl << answers[3] << endl;
+
+
+    } while (userNum > 0);
+
+    system("PAUSE");
+    return 0;
+
+}
+string convert(int digit, string low, string mid, string high)
+{
+
+    cout << digit << endl;
+
+    if (digit == 1)
+    {
+        return low;
+    }
+    if (digit == 2)
+    {
+        return low + low;
+    }
+    if (digit == 3)
+    {
+        return low + low + low;
+    }
+    if (digit == 4)
+    {
+        return low + mid;
+    }
+    if (digit == 5)
+    {
+        return mid;
+    }
+    if (digit == 6)
+    {
+        return mid + low;
+    }
+    if (digit == 7)
+    {
+        return mid + low + low;
+    }
+    if (digit == 8)
+    {
+        return mid + low + low + low;
+    }
+    if (digit == 9)
+    {
+        return low + high;
+    }
+    if (digit == 0)
+    {
+        return "";
+    }
+}
